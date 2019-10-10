@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="portal">
+    <output-path>$PROJECT_DIR$/out/artifacts/portal</output-path>
+    <root id="archive" name="portal.war" />
+  </artifact>
+</component>
