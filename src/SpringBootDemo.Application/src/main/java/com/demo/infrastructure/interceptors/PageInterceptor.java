@@ -16,7 +16,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 @Component
 @Intercepts({@Signature(method = "prepare",
@@ -25,7 +27,7 @@ import java.util.*;
 public class PageInterceptor implements Interceptor {
 
     private static String dialect = "mysql"; // 数据库方言
-    private static String pageSqlId = ".*ListPage.*"; // mapper.xml中需要拦截的ID(正则匹配)
+    //private static String pageSqlId = ".*ListPage.*"; // mapper.xml中需要拦截的ID(正则匹配)
 
     /**
      * 拦截后要执行的方法
@@ -63,17 +65,23 @@ public class PageInterceptor implements Interceptor {
         return invocation.proceed();
     }
 
-    private Page getPageParam(Object parameterObject)
-    {
-        if (parameterObject == null)
-        {
+    private Page getPageParam(Object parameterObject) {
+        if (parameterObject == null) {
             return null;
         }
         Page pageParam = null;
-        if (parameterObject instanceof Map)
-        {
+        if (parameterObject instanceof Map) {
             @SuppressWarnings("unchecked")
-            Map<String, Object> paramMap = (Map<String, Object>)parameterObject;
+            Map<String, Object> paramMap = (Map<String, Object>) parameterObject;
+
+            pageParam = (Page) paramMap.entrySet()
+                    .stream()
+                    .filter(p -> p.getValue() instanceof Page)
+                    .map(p -> p.getValue())
+                    .findFirst()
+                    .orElse(null);
+
+            /*
             Set<String> keySet = paramMap.keySet();
             Iterator<String> iterator = keySet.iterator();
             while (iterator.hasNext()){
@@ -83,8 +91,9 @@ public class PageInterceptor implements Interceptor {
                     return (Page)value;
                 }
             }
-        }else if (parameterObject instanceof Page){
-            pageParam = (Page)parameterObject;
+             */
+        } else if (parameterObject instanceof Page) {
+            pageParam = (Page) parameterObject;
         }
         return pageParam;
     }
