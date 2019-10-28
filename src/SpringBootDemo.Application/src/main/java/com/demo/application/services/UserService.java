@@ -2,7 +2,10 @@ package com.demo.application.services;
 
 import com.demo.application.dao.UserMapper;
 import com.demo.domain.models.User;
+import com.demo.infrastructure.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -14,5 +17,10 @@ public class UserService {
 
     public User selectUser(String id) {
         return userMapper.selectUser(id);
+    }
+
+    public List<User> selectUsers(Page<User> page)
+    {
+        return userMapper.selectUsers(page);
     }
 }

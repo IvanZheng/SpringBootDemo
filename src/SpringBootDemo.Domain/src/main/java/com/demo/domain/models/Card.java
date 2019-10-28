@@ -1,15 +1,12 @@
 package com.demo.domain.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
-import java.util.List;
 
-@JsonIgnoreProperties({"handler"})
-public class User implements Serializable {
+public class Card implements Serializable {
     private String id;
     private String name;
-    private List<Card> cards;
+    private String userId;
+
 
     public String getId() {
         return id;
@@ -27,7 +24,12 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public List<Card> getCards() {
-        return cards;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    protected void setUserId(String userId) {
+        this.userId = userId;
     }
 }

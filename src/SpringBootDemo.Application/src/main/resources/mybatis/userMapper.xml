@@ -3,7 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.demo.application.dao.UserMapper">
-    <select id="selectUser" resultType="com.demo.domain.models.User">
-    select * from Users where id = #{id}
-  </select>
+    <resultMap id="userMap" type="com.demo.domain.models.User">
+        <id property="id" column="id"></id>
+        <collection property="cards" column="id" fetchType="lazy"
+                    select="com.demo.application.dao.CardMapper.findCardsByUserId"></collection>
+    </resultMap>
+    <resultMap id="userMap2" type="com.demo.domain.models.User">
+        <id property="id" column="id"></id>
+    </resultMap>
+    <select id="selectUser" resultMap="userMap">
+        select * from Users where id = #{id}
+    </select>
+    <select id="selectUsers" resultMap="userMap">
+        select * from Users
+    </select>
 </mapper>

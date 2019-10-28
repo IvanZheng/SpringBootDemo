@@ -1,5 +1,6 @@
 package com.demo.portal;
 
+import com.demo.infrastructure.interceptors.PageInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -38,5 +39,4 @@ public class DemoApplication {
             }
         };
     }
-
 }

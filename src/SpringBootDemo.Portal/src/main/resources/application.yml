@@ -1,2 +1,6 @@
 mybatis:
   mapper-locations: classpath:mybatis/*.xml
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+  
