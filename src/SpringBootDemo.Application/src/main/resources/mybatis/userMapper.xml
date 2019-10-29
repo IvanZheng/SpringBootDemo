@@ -14,7 +14,11 @@
     <select id="selectUser" resultMap="userMap">
         select * from Users where id = #{id}
     </select>
-
+    <sql id="orderBy">
+        <foreach collection="orderBys" item="orderBy" separator=",">
+            ${prefix}${orderBy}
+        </foreach>
+    </sql>
     <!-- 基础用户查询 -->
     <sql id="selectUsersBase">
         select id from Users
@@ -29,8 +33,10 @@
     </select>
     <select id="selectUsers" resultMap="userMap">
         select u.* from Users u
-        join (<include refid="selectUsersBase"></include> order by name limit #{pageNo}, #{pageSize}) as ids
+        join (<include refid="selectUsersBase"></include>
+        order by <include refid="orderBy"><property name="prefix" value=""/></include>
+        limit #{pageNo}, #{pageSize}) as ids
         on u.id = ids.id
-        order by u.name
+        order by <include refid="orderBy"><property name="prefix" value="u."/></include>
     </select>
 </mapper>
