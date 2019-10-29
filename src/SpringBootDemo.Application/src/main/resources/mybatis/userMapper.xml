@@ -14,7 +14,23 @@
     <select id="selectUser" resultMap="userMap">
         select * from Users where id = #{id}
     </select>
+
+    <!-- 基础用户查询 -->
+    <sql id="selectUsersBase">
+        select id from Users
+         <where>
+             <if test="params.name != null and params.name !=''">
+                 name like concat('%', #{params.name}, '%')
+             </if>
+         </where>
+    </sql>
+    <select id="selectUsersTotalCount">
+        select count(1) from (<include refid="selectUsersBase"></include>) as total
+    </select>
     <select id="selectUsers" resultMap="userMap">
-        select * from Users
+        select u.* from Users u
+        join (<include refid="selectUsersBase"></include> order by name limit #{pageNo}, #{pageSize}) as ids
+        on u.id = ids.id
+        order by u.name
     </select>
 </mapper>

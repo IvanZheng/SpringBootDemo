@@ -1,6 +1,8 @@
 package com.demo.portal.models;
 
-public class UserDto {
+import java.io.Serializable;
+
+public class UserDto implements Serializable {
 
 
     private String id;

@@ -19,7 +19,7 @@ public class UserService {
         return userMapper.selectUser(id);
     }
 
-    public List<User> selectUsers(Page<User> page)
+    public List<User> selectUsers(Page page)
     {
         return userMapper.selectUsers(page);
     }

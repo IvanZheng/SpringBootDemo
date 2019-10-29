@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class Page<T extends Serializable> {
 
-    private int pageNo = 1;// 页码，默认是第一页
+    private int pageNo = 0;// 页码，默认是第一页
     private int pageSize = 10;// 每页显示的记录数，默认是15
     private int totalRecord;// 总记录数
     private int totalPage;// 总页数
-    private List<T> results;// 对应的当前页记录
+    private T[] results;// 对应的当前页记录
     private Map<String, Object> params = new HashMap<String, Object>();// 其他的参数我们把它分装成一个Map对象
 
     public Page(){}
@@ -77,14 +77,14 @@ public class Page<T extends Serializable> {
     /**
      * @return the results
      */
-    public List<T> getResults() {
+    public T[] getResults() {
         return results;
     }
     /**
      * @param results
      *            the results to set
      */
-    public void setResults(List<T> results) {
+    public void setResults(T[] results) {
         this.results = results;
     }
     /**

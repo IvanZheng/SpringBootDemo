@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     User selectUser(String id);
-    List<User> selectUsers(Page<User> page);
+    List<User> selectUsers(Page page);
 }

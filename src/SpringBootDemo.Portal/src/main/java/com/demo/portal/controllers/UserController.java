@@ -5,13 +5,11 @@ import com.demo.application.services.UserService;
 import com.demo.domain.models.*;
 import com.demo.infrastructure.Page;
 import com.demo.portal.models.UserDto;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -30,15 +28,15 @@ public class UserController {
     }
 
     @RequestMapping(value ="/{pageIndex}/{pageSize}")
-    public Page<User> get(@PathVariable Integer pageIndex, @PathVariable int pageSize)
+    public Page<UserDto> get(@PathVariable Integer pageIndex, @PathVariable int pageSize, @RequestParam(required = false) String name)
     {
-        Page<User> page = new Page<>(pageIndex, pageSize);
-        List<User> users = userService.selectUsers(page);
+        Page<UserDto> page = new Page<>(pageIndex, pageSize);
+        page.getParams().put("name", name);
+        UserDto[] users = userService.selectUsers(page)
+                .stream()
+                .map(u -> new UserDto(u.getId(), u.getName()))
+                .toArray(UserDto[]::new);
         page.setResults(users);
-//        List<UserDto> userDtoList = new ArrayList<>();
-//        for (User user: users) {
-//            userDtoList.add(new UserDto(user.getId(), user.getName()));
-//        }
         return page;
     }
 }
