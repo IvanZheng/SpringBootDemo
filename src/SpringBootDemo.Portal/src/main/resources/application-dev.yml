@@ -56,4 +56,4 @@ spring:
 
 mybatis:
   configuration:
-    log-impl: org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl
+    #log-impl: org.apache.ibatis.logging.commons.JakartaCommonsLoggingImpl
