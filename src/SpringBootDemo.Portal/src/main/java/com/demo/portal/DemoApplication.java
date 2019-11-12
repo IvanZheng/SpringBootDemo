@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 
 import java.util.Arrays;
@@ -30,7 +31,6 @@ public class DemoApplication {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-            String path = ResourceUtils.getURL("classpath:").getPath();
             if (env.acceptsProfiles(Profiles.of("dev"))) {
                 System.out.println("Let's inspect the beans provided by Spring Boot:");
                 String[] beanNames = ctx.getBeanDefinitionNames();
