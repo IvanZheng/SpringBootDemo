@@ -1,6 +1,5 @@
 package com.demo.portal;
 
-import com.demo.infrastructure.interceptors.PageInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +16,7 @@ import java.util.Arrays;
 @SpringBootApplication
 @ComponentScan("com.demo")
 @MapperScan("com.demo.application.dao")
+//@ImportResource(locations={"classpath:spring-mybatis.xml"})
 public class DemoApplication {
 
     public static void main(String[] args) {
@@ -40,3 +40,5 @@ public class DemoApplication {
         };
     }
 }
+
+
