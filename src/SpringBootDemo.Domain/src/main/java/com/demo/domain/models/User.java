@@ -3,6 +3,8 @@ package com.demo.domain.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,6 +15,7 @@ public class User {
     private String gender;
     private UserProfile userProfile;
     private List<Card> cards;
+    private Timestamp Version;
 
     public User() {
     }
@@ -23,6 +26,13 @@ public class User {
         this.gender = gender;
         this.userProfile = userProfile;
         setCards(cards);
+    }
+
+    public void update(String name, String gender, UserProfile userProfile)
+    {
+        setName(name);
+        setGender(gender);
+        setUserProfile(userProfile);
     }
 
     public String getId() {
@@ -49,7 +59,7 @@ public class User {
         return userProfile;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
+    protected void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
     }
 
@@ -64,6 +74,14 @@ public class User {
     protected void setCards(List<Card> cards) {
         cards.forEach(card -> card.setUserId(getId()));
         this.cards = cards;
+    }
+
+    public Timestamp getVersion() {
+        return Version;
+    }
+
+    private void setVersion(Timestamp version) {
+        Version = version;
     }
 }
 

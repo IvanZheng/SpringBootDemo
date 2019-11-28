@@ -7,6 +7,7 @@
         <id property="id" column="id"></id>
         <result column="name" property="name"></result>
         <result column="gender" property="gender"></result>
+        <result column="version" property="version" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"></result>
         <association property="userProfile"
                      javaType="com.demo.domain.models.UserProfile">
             <result column="userProfile_hobby" property="hobby" />
@@ -62,4 +63,13 @@
             #{card.id},#{card.name}, #{userId}
         </foreach>
     </insert>
+    <update id="updateUser" parameterType="com.demo.domain.models.User">
+        update Users set name = #{name},
+            gender = #{gender},
+            userProfile_hobby = #{userProfile.hobby},
+            userProfile_address_country = #{userProfile.address.country},
+            userProfile_address_city = #{userProfile.address.city},
+            userProfile_address_street = #{userProfile.address.street}
+        where id = #{id} and version = #{version}
+    </update>
 </mapper>

@@ -23,4 +23,5 @@ public interface UserMapper {
         insertCards(user.getCards(), user.getId());
     }
 
+    boolean updateUser(User user);
 }

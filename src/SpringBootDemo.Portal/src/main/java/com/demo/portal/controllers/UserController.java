@@ -23,6 +23,13 @@ public class UserController {
         return user;
     }
 
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public User put(@RequestBody User user) {
+        user = userService.updateUser(user);
+        return user;
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User get(@PathVariable String id) {
         logger.debug("get user {}", id);
