@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 @JsonIgnoreProperties({"handler"})
-public class User implements Serializable {
+public class User {
     private String id;
     private String name;
     private String gender;
@@ -22,7 +22,7 @@ public class User implements Serializable {
         this.name = name;
         this.gender = gender;
         this.userProfile = userProfile;
-        this.cards = cards;
+        setCards(cards);
     }
 
     public String getId() {
@@ -59,6 +59,11 @@ public class User implements Serializable {
 
     protected void setGender(String gender) {
         this.gender = gender;
+    }
+
+    protected void setCards(List<Card> cards) {
+        cards.forEach(card -> card.setUserId(getId()));
+        this.cards = cards;
     }
 }
 

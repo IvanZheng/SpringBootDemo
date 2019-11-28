@@ -2,7 +2,7 @@ package com.demo.domain.models;
 
 import java.io.Serializable;
 
-public class Address implements Serializable {
+public class Address  {
     private String country;
     private String city;
     private String street;

@@ -51,8 +51,15 @@
         on u.id = ids.id
         order by <include refid="orderBy"><property name="prefix" value="u."/></include>
     </select>
-    <insert id="addUser" parameterType="com.demo.domain.models.User">
+    <insert id="insertUser" parameterType="com.demo.domain.models.User">
         insert into Users (id, name, Gender, userProfile_address_country, userProfile_address_city, userProfile_address_street, userProfile_hobby)
         values( #{id}, #{name}, #{gender}, #{userProfile.address.country}, #{userProfile.address.city}, #{userProfile.address.street}, #{userProfile.hobby})
+    </insert>
+    <insert id="insertCards">
+        INSERT INTO cards (id, name, userId)
+        VALUES
+        <foreach collection="cards" item="card" open="(" separator="),(" close=")">
+            #{card.id},#{card.name}, #{userId}
+        </foreach>
     </insert>
 </mapper>

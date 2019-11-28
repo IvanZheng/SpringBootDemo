@@ -1,13 +1,16 @@
 package com.demo.domain.models;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Card implements Serializable {
     private String id;
     private String name;
     private String userId;
 
-
+    public Card(){
+        setId(UUID.randomUUID().toString());
+    }
     public String getId() {
         return id;
     }

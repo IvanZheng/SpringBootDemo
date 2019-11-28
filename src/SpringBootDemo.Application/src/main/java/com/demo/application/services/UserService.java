@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public User createUser(User addUser) {
-        User user = new User(addUser.getName(), addUser.getGender(), addUser.getUserProfile(), null);
+        User user = new User(addUser.getName(), addUser.getGender(), addUser.getUserProfile(), addUser.getCards());
         userMapper.addUser(user);
         return user;
     }

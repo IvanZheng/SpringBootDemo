@@ -2,7 +2,7 @@ package com.demo.domain.models;
 
 import java.io.Serializable;
 
-public class UserProfile implements Serializable{
+public class UserProfile{
     private Address address;
     private String hobby;
     public Address getAddress() {
