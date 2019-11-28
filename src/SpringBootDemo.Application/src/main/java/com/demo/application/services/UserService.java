@@ -23,4 +23,10 @@ public class UserService {
     {
         return userMapper.selectUsers(page);
     }
+
+    public User createUser(User addUser) {
+        User user = new User(addUser.getName(), addUser.getGender(), addUser.getUserProfile(), null);
+        userMapper.addUser(user);
+        return user;
+    }
 }

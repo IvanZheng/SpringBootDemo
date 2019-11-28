@@ -11,4 +11,6 @@ import java.util.List;
 public interface UserMapper {
     User selectUser(String id);
     List<User> selectUsers(Page page);
+
+    void addUser(User user);
 }

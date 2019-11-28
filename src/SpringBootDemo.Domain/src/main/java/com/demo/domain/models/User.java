@@ -4,12 +4,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 @JsonIgnoreProperties({"handler"})
 public class User implements Serializable {
     private String id;
     private String name;
+    private String gender;
+    private UserProfile userProfile;
     private List<Card> cards;
+
+    public User() {
+    }
+
+    public User(String name, String gender, UserProfile userProfile, List<Card> cards) {
+        setId(UUID.randomUUID().toString());
+        this.name = name;
+        this.gender = gender;
+        this.userProfile = userProfile;
+        this.cards = cards;
+    }
 
     public String getId() {
         return id;
@@ -30,4 +44,21 @@ public class User implements Serializable {
     public List<Card> getCards() {
         return cards;
     }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    protected void setGender(String gender) {
+        this.gender = gender;
+    }
 }
+

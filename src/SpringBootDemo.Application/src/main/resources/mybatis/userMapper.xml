@@ -5,6 +5,18 @@
 <mapper namespace="com.demo.application.dao.UserMapper">
     <resultMap id="userMap" type="com.demo.domain.models.User">
         <id property="id" column="id"></id>
+        <result column="name" property="name"></result>
+        <result column="gender" property="gender"></result>
+        <association property="userProfile"
+                     javaType="com.demo.domain.models.UserProfile">
+            <result column="userProfile_hobby" property="hobby" />
+            <association property="address"
+                         javaType="com.demo.domain.models.Address">
+                <result column="userProfile_address_country" property="country" />
+                <result column="userProfile_address_city" property="city" />
+                <result column="userProfile_address_street" property="street" />
+            </association>
+        </association>
         <collection property="cards" column="id" fetchType="lazy"
                     select="com.demo.application.dao.CardMapper.findCardsByUserId"></collection>
     </resultMap>
@@ -39,4 +51,8 @@
         on u.id = ids.id
         order by <include refid="orderBy"><property name="prefix" value="u."/></include>
     </select>
+    <insert id="addUser" parameterType="com.demo.domain.models.User">
+        insert into Users (id, name, Gender, userProfile_address_country, userProfile_address_city, userProfile_address_street, userProfile_hobby)
+        values( #{id}, #{name}, #{gender}, #{userProfile.address.country}, #{userProfile.address.city}, #{userProfile.address.street}, #{userProfile.hobby})
+    </insert>
 </mapper>
