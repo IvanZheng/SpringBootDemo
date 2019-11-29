@@ -33,6 +33,7 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User get(@PathVariable String id) {
         logger.debug("get user {}", id);
+        logger.error("get user {}", id);
         User user = userService.selectUser(id);
         return user;
         //return new UserDto(id, user.getName());
