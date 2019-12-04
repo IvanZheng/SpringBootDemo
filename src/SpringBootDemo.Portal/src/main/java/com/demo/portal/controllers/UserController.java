@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@CacheConfig(cacheNames = "default")
+//@CacheConfig(cacheNames = "default")
 @RestController
 @RequestMapping("/users")
 public class UserController {
