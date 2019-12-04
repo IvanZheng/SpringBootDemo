@@ -12,8 +12,8 @@
     <!--输出到文件（info）-->
     <!--将生成“info.log.2014-06-11”这样的日志文件-->
     <appender name="fileAppenderInfo" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="data/logs/debug.log" />
-        <param name="DatePattern" value=".yyyy-MM-dd" />
+        <param name="File" value="data/logs/debug_" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
         </layout>
@@ -25,8 +25,8 @@
 
     <!--输出到文件（warn）-->
     <appender name="fileAppenderWarn" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="data/logs/warn.log" />
-        <param name="DatePattern" value=".yyyy-MM-dd" />
+        <param name="File" value="data/logs/warn_" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
         </layout>
@@ -39,8 +39,8 @@
 
     <!--输出到文件（error）-->
     <appender name="fileAppenderError" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="data/logs/error.log" />
-        <param name="DatePattern" value=".yyyy-MM-dd" />
+        <param name="File" value="data/logs/error_" />
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
         </layout>
@@ -51,9 +51,9 @@
     </appender>
 
     <!--屏蔽所有org.springframework.*输出的Debug（及以下）信息-->
-<!--    <logger name="org.springframework">-->
-<!--        <level value="INFO"></level>-->
-<!--    </logger>-->
+    <logger name="org.springframework">
+        <level value="WARN"></level>
+    </logger>
     <logger name="com.demo">
         <appender-ref ref="fileAppenderInfo" />
     </logger>
