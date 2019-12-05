@@ -4,10 +4,13 @@ import com.demo.application.services.UserService;
 import com.demo.domain.models.User;
 import com.demo.infrastructure.Page;
 import com.demo.portal.models.UserDto;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@CacheConfig(cacheNames = "default")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -39,6 +42,7 @@ public class UserController {
         //return new UserDto(id, user.getName());
     }
 
+    //@Cacheable
     @RequestMapping(value = "/{pageIndex}/{pageSize}")
     public Page<User> get(@PathVariable int pageIndex,
                              @PathVariable int pageSize,
