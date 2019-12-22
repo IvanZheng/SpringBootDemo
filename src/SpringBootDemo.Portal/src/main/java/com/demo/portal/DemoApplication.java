@@ -25,12 +25,15 @@ import java.util.Arrays;
 //@ImportResource(locations={"classpath:spring-mybatis.xml"})
 public class DemoApplication {
 
+    public DemoApplication(Environment env) {
+        this.env = env;
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
