@@ -1,7 +1,9 @@
 package com.demo.domain.models;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class Address  {
     private String country;
     private String city;

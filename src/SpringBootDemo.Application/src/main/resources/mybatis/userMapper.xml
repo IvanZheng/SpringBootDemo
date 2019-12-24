@@ -10,12 +10,12 @@
         <result column="version" property="version" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"></result>
         <association property="userProfile"
                      javaType="com.demo.domain.models.UserProfile">
-            <result column="userProfile_hobby" property="hobby" />
+            <result column="user_Profile_hobby" property="hobby" />
             <association property="address"
                          javaType="com.demo.domain.models.Address">
-                <result column="userProfile_address_country" property="country" />
-                <result column="userProfile_address_city" property="city" />
-                <result column="userProfile_address_street" property="street" />
+                <result column="user_Profile_address_country" property="country" />
+                <result column="user_Profile_address_city" property="city" />
+                <result column="user_Profile_address_street" property="street" />
             </association>
         </association>
         <collection property="cards" column="id" fetchType="lazy"
@@ -53,23 +53,23 @@
         order by <include refid="orderBy"><property name="prefix" value="u."/></include>
     </select>
     <insert id="insertUser" parameterType="com.demo.domain.models.User">
-        insert into Users (id, name, Gender, userProfile_address_country, userProfile_address_city, userProfile_address_street, userProfile_hobby)
+        insert into Users (id, name, Gender, user_Profile_address_country, user_Profile_address_city, user_Profile_address_street, user_Profile_hobby)
         values( #{id}, #{name}, #{gender}, #{userProfile.address.country}, #{userProfile.address.city}, #{userProfile.address.street}, #{userProfile.hobby})
     </insert>
     <insert id="insertCards">
         INSERT INTO cards (id, name, userId)
         VALUES
         <foreach collection="cards" item="card" open="(" separator="),(" close=")">
-            #{card.id},#{card.name}, #{userId}
+            #{card.id},#{card.name}, #{user.Id}
         </foreach>
     </insert>
     <update id="updateUser" parameterType="com.demo.domain.models.User">
         update Users set name = #{name},
             gender = #{gender},
-            userProfile_hobby = #{userProfile.hobby},
-            userProfile_address_country = #{userProfile.address.country},
-            userProfile_address_city = #{userProfile.address.city},
-            userProfile_address_street = #{userProfile.address.street}
+            user_Profile_hobby = #{userProfile.hobby},
+            user_Profile_address_country = #{userProfile.address.country},
+            user_Profile_address_city = #{userProfile.address.city},
+            user_Profile_address_street = #{userProfile.address.street}
         where id = #{id} and version = #{version}
     </update>
 </mapper>

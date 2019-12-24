@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 
@@ -19,6 +21,8 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @ComponentScan("com.demo")
+@EnableJpaRepositories("com.demo")
+@EntityScan("com.demo.*")
 @MapperScan("com.demo.application.dao")
 @EnableCaching
 

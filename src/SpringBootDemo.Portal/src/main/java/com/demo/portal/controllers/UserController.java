@@ -6,13 +6,17 @@ import com.demo.infrastructure.Page;
 import com.demo.portal.models.UserDto;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 //@CacheConfig(cacheNames = "default")
 @RestController
 @RequestMapping("/users")
+
 public class UserController {
     final UserService userService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,6 +35,12 @@ public class UserController {
     public User put(@RequestBody User user) {
         user = userService.updateUser(user);
         return user;
+    }
+
+    @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
+    public List<User> getByName(@PathVariable String name){
+
+        return userService.findByName(name);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

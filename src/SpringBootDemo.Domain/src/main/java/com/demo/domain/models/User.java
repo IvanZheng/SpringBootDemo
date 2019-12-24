@@ -1,18 +1,54 @@
 package com.demo.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.LazyCollection;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @JsonIgnoreProperties({"handler"})
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
     private String id;
     private String name;
     private String gender;
+
+    @AttributeOverrides({
+            @AttributeOverride(name="address.country",
+                    column=@Column(name="userProfile_AddressCountry")),
+            @AttributeOverride(name="address.city",
+                    column=@Column(name="userProfile_AddressCity")),
+            @AttributeOverride(name="address.street",
+                    column=@Column(name="userProfile_AddressStreet")),
+            @AttributeOverride(name="hobby",
+                    column=@Column(name="userProfile_hobby")),
+    })
     private UserProfile userProfile;
-    private List<Card> cards;
+
+    @AttributeOverrides({
+            @AttributeOverride(name="address.country",
+                    column=@Column(name="userProfile2_AddressCountry")),
+            @AttributeOverride(name="address.city",
+                    column=@Column(name="userProfile2_AddressCity")),
+            @AttributeOverride(name="address.street",
+                    column=@Column(name="userProfile2_AddressStreet")),
+            @AttributeOverride(name="hobby",
+                    column=@Column(name="userProfile2_hobby")),
+    })
+    private UserProfile userProfile2;
+
+    @ElementCollection
+    private List<String> numbers = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    private List<Card> cards = new ArrayList<>();
+
+    @Version
     private Timestamp version;
 
     public User() {
@@ -47,7 +83,7 @@ public class User {
     }
 
     private void setCards(List<Card> cards) {
-        cards.forEach(card -> card.setUserId(getId()));
+        //cards.forEach(card -> card.setUserId(getId()));
         this.cards = cards;
     }
 
@@ -61,6 +97,14 @@ public class User {
 
     public Timestamp getVersion() {
         return version;
+    }
+
+    public UserProfile getUserProfile2() {
+        return userProfile2;
+    }
+
+    protected void setUserProfile2(UserProfile userProfile2) {
+        this.userProfile2 = userProfile2;
     }
 
 //    protected void setVersion(Timestamp version) {

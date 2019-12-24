@@ -1,7 +1,9 @@
 package com.demo.domain.models;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class UserProfile{
     private Address address;
     private String hobby;

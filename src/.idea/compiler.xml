@@ -10,9 +10,13 @@
         <module name="SpringBootDemoDomain" />
         <module name="SpringBootDemoPortal" />
         <module name="SpringBootDemoApplication" />
+        <module name="IFramework" />
         <module name="SpringBootDemo.Domain" />
         <module name="SpringBootDemo.Portal" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="IFramework" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
