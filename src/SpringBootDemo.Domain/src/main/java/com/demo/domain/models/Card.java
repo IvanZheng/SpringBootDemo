@@ -9,6 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "cards")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Card implements Serializable {
     @Id
     private String id;

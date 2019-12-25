@@ -3,14 +3,17 @@ package com.demo.domain.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@JsonIgnoreProperties({"handler"})
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "users")
 public class User {
@@ -51,6 +54,7 @@ public class User {
     private List<Card> cards = new ArrayList<>();
 
     @Version
+    @Type(type = "timestamp")
     private Timestamp version;
 
     public User() {
@@ -97,7 +101,7 @@ public class User {
         return gender;
     }
 
-    public Timestamp getVersion() {
+    public Date getVersion() {
         return version;
     }
 

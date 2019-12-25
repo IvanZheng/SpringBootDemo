@@ -50,4 +50,15 @@ public class UserService {
         }
         return user;
     }
+
+
+    public User jpaUpdateUser(User updateUser) {
+        User user = userRepository.getOne(updateUser.getId());
+        user.update(updateUser.getName(),
+                updateUser.getGender(),
+                updateUser.getUserProfile());
+
+        userRepository.save(user);
+        return user;
+    }
 }

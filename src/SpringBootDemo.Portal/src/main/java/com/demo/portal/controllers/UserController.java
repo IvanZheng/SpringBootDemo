@@ -33,7 +33,7 @@ public class UserController {
 
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public User put(@RequestBody User user) {
-        user = userService.updateUser(user);
+        user = userService.jpaUpdateUser(user);
         return user;
     }
 
