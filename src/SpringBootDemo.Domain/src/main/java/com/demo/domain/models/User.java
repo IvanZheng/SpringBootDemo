@@ -2,10 +2,12 @@ package com.demo.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +17,7 @@ import java.util.UUID;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
+@DynamicUpdate
 @Table(name = "users")
 public class User {
     @Id
@@ -54,8 +57,7 @@ public class User {
     private List<Card> cards = new ArrayList<>();
 
     @Version
-    @Type(type = "timestamp")
-    private Timestamp version;
+    private int version;
 
     public User() {
     }
@@ -101,7 +103,7 @@ public class User {
         return gender;
     }
 
-    public Date getVersion() {
+    public int getVersion() {
         return version;
     }
 

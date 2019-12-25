@@ -58,7 +58,7 @@ public class UserService {
                 updateUser.getGender(),
                 updateUser.getUserProfile());
 
-        userRepository.save(user);
+        userRepository.flush();
         return user;
     }
 }
