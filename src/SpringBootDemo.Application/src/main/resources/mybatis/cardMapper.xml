@@ -5,9 +5,16 @@
 <mapper namespace="com.demo.application.dao.CardMapper">
     <resultMap id="cardMap" type="com.demo.domain.models.Card">
         <id property="id" column="id"></id>
-        <result column="userId" property="user.id"></result>
+        <association property="user"
+                     javaType="com.demo.domain.models.User">
+            <result column="user_id" property="id"/>
+            <result column="userName" property="name"></result>
+            <result column="userGender" property="gender"></result>
+        </association>
     </resultMap>
     <select id="findCardsByUserId" resultMap="cardMap">
-    select * from Cards where userId = #{userId}
+    select c.*, u.name userName, u.gender userGender from Cards  c
+    left join users u on u.id = c.user_id
+    where c.user_Id = #{userId}
   </select>
 </mapper>

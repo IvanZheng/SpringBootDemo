@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SpringBootDemo.Application" />
         <module name="SpringBootDemoDomain" />
+        <module name="SpringBootDemo.Portal" />
         <module name="SpringBootDemoPortal" />
         <module name="SpringBootDemoApplication" />
         <module name="IFramework" />
         <module name="SpringBootDemo.Domain" />
-        <module name="SpringBootDemo.Portal" />
+        <module name="SpringBootDemo.Application" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

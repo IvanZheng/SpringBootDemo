@@ -39,7 +39,6 @@ public class UserController {
 
     @RequestMapping(value = "/byName/{name}", method = RequestMethod.GET)
     public List<User> getByName(@PathVariable String name){
-
         return userService.findByName(name);
     }
 

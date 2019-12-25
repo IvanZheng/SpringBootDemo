@@ -1,6 +1,7 @@
 package com.demo.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.*;
@@ -46,6 +47,7 @@ public class User {
     private List<String> numbers = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    @JsonIgnoreProperties("user")
     private List<Card> cards = new ArrayList<>();
 
     @Version

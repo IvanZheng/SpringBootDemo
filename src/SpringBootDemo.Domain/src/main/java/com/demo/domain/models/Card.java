@@ -1,5 +1,8 @@
 package com.demo.domain.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
@@ -13,6 +16,7 @@ public class Card implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
+    @JsonIgnoreProperties("cards")
     private User user;
 
     public Card(){
@@ -38,5 +42,9 @@ public class Card implements Serializable {
 
     protected void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
