@@ -12,12 +12,6 @@ spring:
      servlet:
        content-type: text/html
 
-security:
-  jwt:
-    token:
-      secret-key: demoKey
-      expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
-
 mybatis:
   mapper-locations: classpath:mybatis/*.xml
   configuration:
