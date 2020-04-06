@@ -22,7 +22,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.util.Arrays;
 
-@SpringBootApplication(exclude={SecurityAutoConfiguration.class})
+@SpringBootApplication
 @ComponentScan("com.demo")
 @EnableJpaRepositories("com.demo")
 @EntityScan("com.demo.*")
