@@ -2,6 +2,16 @@ spring:
   jackson:
     serialization-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
+  thymeleaf:
+     cache: false
+     prefix: classpath:/templates/
+     check-template-location: true
+     suffix: .html
+     encoding: UTF-8
+     mode: HTML
+     servlet:
+       content-type: text/html
+
 security:
   jwt:
     token:
@@ -15,4 +25,3 @@ mybatis:
     aggressive-lazy-loading: false
 
 
-  
