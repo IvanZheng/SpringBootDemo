@@ -23,6 +23,7 @@ security:
         - roles
         - profile
         - openid
+      grant-type: authorization_code
     resource:
       userInfoUri: http://zero.teamcore.cn/ids/connect/userinfo
 
