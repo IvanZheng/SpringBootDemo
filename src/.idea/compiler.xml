@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="SpringBootDemo.Application" />
         <module name="SpringBootDemoDomain" />
-        <module name="SpringBootDemo.Portal" />
         <module name="SpringBootDemoPortal" />
         <module name="SpringBootDemoApplication" />
         <module name="IFramework" />
         <module name="SpringBootDemo.Domain" />
-        <module name="SpringBootDemo.Application" />
+        <module name="SpringBootDemo.Portal" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,7 +21,10 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SpringBootDemo.Application" options="" />
+      <module name="SpringBootDemo.Domain" options="" />
       <module name="SpringBootDemo.Portal" options="" />
+      <module name="demo" options="" />
     </option>
   </component>
 </project>
