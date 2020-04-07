@@ -4,6 +4,6 @@
 </head>
 <body>
 <span th:text="${'Welcome ' + username + ' to Spring Mvc'}"></span>
-<a href="/logout?sid=UNexE34EepGLQqS8J8lNRA&iss=http%3A%2F%2Fzero.teamcore.cn%2Fids">logout</a>
+<a th:href="${logoutUri}">logout</a>
 </body>
 </html>

@@ -55,6 +55,16 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.1.9.RELEASE" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.17" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+          <element id="archive" name="'SpringBootDemo.Application' JPA descriptors.jar">
+            <element id="jpa-descriptors" facet="SpringBootDemo.Application/jpa/JPA" />
+          </element>
+          <element id="archive" name="SpringBootDemo.Application.jar">
+            <element id="module-output" name="SpringBootDemo.Application" />
+          </element>
+          <element id="archive" name="SpringBootDemo.Domain.jar">
+            <element id="module-output" name="SpringBootDemo.Domain" />
+          </element>
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:2.2.6.RELEASE" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="SpringBootDemo.Portal/web/Web" />
