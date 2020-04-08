@@ -7,11 +7,24 @@ import com.demo.portal.models.UserDto;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+
+
+@Controller
+class Routes {
+    @RequestMapping({
+            "/",
+    })
+    public String index() {
+        return "forward:/home";
+    }
+}
+
 
 //@CacheConfig(cacheNames = "default")
 @RestController
