@@ -60,20 +60,35 @@ spring:
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
 
 
-security:
-  oauth2:
-    client:
-      clientId: SpringBootMvc
-      clientSecret: secret
-      accessTokenUri: http://zero.teamcore.cn/ids/connect/token
-      userAuthorizationUri: http://zero.teamcore.cn/ids/connect/authorize
-      scope:
-        - roles
-        - profile
-        - openid
-      grant-type: authorization_code
-    resource:
-      userInfoUri: http://zero.teamcore.cn/ids/connect/userinfo
+  security:
+    oauth2:
+      client:
+        registration:
+          zero:
+           client-id: SpringBootMvc
+           client-secret: secret
+           scope:
+             - roles
+             - profile
+             - openid
+           postLogoutRedirectUri: http://localhost:8082
+        provider:
+          zero:
+            issuer-uri: http://zero.teamcore.cn/ids
+#security:
+#  oauth2:
+#    client:
+#      clientId: SpringBootMvc
+#      clientSecret: secret
+#      accessTokenUri: http://zero.teamcore.cn/ids/connect/token
+#      userAuthorizationUri: http://zero.teamcore.cn/ids/connect/authorize
+#      scope:
+#        - roles
+#        - profile
+#        - openid
+#      grant-type: authorization_code
+#    resource:
+#      userInfoUri: http://zero.teamcore.cn/ids/connect/userinfo
 
 mybatis:
   configuration:

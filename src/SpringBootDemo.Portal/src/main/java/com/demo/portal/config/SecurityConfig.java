@@ -1,51 +1,54 @@
 package com.demo.portal.config;
 
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.header.writers.DelegatingRequestMatcherHeaderWriter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.security.web.header.writers.frameoptions.WhiteListedAllowFromStrategy;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+import org.springframework.security.web.util.matcher.*;
 
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
-@EnableOAuth2Sso
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/**")
-                .authorizeRequests()
-                .antMatchers( "/login**", "/users/**")
-                .permitAll()
-                .anyRequest()
-                .authenticated();
-        http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/home")
-                .invalidateHttpSession(true)        // set invalidation state when logout
-                .deleteCookies("JSESSIONID")
-                .and().csrf().disable();
+    final ClientRegistrationRepository clientRegistrationRepository;
+
+    public SecurityConfig(ClientRegistrationRepository clientRegistrationRepository) {
+        this.clientRegistrationRepository = clientRegistrationRepository;
     }
 
-//    @Autowired
-//    private ClientRegistrationRepository clientRegistrationRepository;
-//
-//    private LogoutSuccessHandler oidcLogoutSuccessHandler() {
-//        OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler =
-//                new OidcClientInitiatedLogoutSuccessHandler(
-//                        this.clientRegistrationRepository);
-//
-//        oidcLogoutSuccessHandler.setPostLogoutRedirectUri(
-//                URI.create("http://localhost:8082/logout"));
-//
-//        return oidcLogoutSuccessHandler;
-//    }
+    OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler() {
+        OidcClientInitiatedLogoutSuccessHandler successHandler = new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
+        successHandler.setPostLogoutRedirectUri("http://localhost:8082");
+        return successHandler;
+    }
 
-//    @Bean
-//    public FilterRegistrationBean oauth2ClientFilterRegistration(
-//            OAuth2ClientContextFilter filter) {
-//        FilterRegistrationBean registration = new FilterRegistrationBean();
-//        registration.setFilter(filter);
-//        registration.setOrder(-100);
-//        return registration;
-//    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .headers().frameOptions().disable()
+                .addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM zero.teamcore.cn"));
+
+        http.authorizeRequests()
+
+                // allow anonymous access to the root page
+                .antMatchers("/users/**", "/logout").permitAll()
+
+                // all other requests
+                .anyRequest().authenticated()
+
+                // RP-initiated logout
+                .and().logout().logoutSuccessHandler(oidcLogoutSuccessHandler())
+                // enable OAuth2/OIDC
+                .and().oauth2Login();
+    }
 }

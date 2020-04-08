@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body>
+<h1>
+   <span th:text="${'Welcome ' + username + ' to Spring Mvc'}"></span>
+</h1>
+<form class="form-signin" method="post" action="/logout">
+   <input
+           type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+   <input name="_csrf" type="hidden" value="43c74589-63c5-4b2d-a6b2-2946d3c34fb6">
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Log Out</button>
+</form>
+<div>
+   <label>claims: </label>
+   <span th:text="${claims}"></span>
+</div>
+<br>
+<div>
+   <label>tokenValue: </label>
+   <span th:text="${tokenValue}"></span>
+</div>
+
+</body>
+</html>
