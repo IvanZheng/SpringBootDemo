@@ -4,9 +4,9 @@
 </head>
 <body>
 <h1>
-   <span th:text="${'Welcome ' + username + ' to Spring Mvc'}"></span>
+   <span th:text="${'Welcome ' + username + ' to Spring Mvc!'}"></span>
 </h1>
-<form class="form-signin" method="post" action="/logout">
+<form class="form-signin" method="post" th:action="@{/logout}">
    <input
            type="hidden"
            th:name="${_csrf.parameterName}"
