@@ -2,10 +2,12 @@ package com.demo.portal.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.header.writers.DelegatingRequestMatcherHeaderWriter;
@@ -19,27 +21,24 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    final ClientRegistrationRepository clientRegistrationRepository;
-
-    public SecurityConfig(ClientRegistrationRepository clientRegistrationRepository) {
-        this.clientRegistrationRepository = clientRegistrationRepository;
-    }
+public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    ClientRegistrationRepository clientRegistrationRepository;
+    @Autowired
+    Environment environment;
 
     OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler() {
         OidcClientInitiatedLogoutSuccessHandler successHandler = new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
-        successHandler.setPostLogoutRedirectUri("http://localhost:8082");
+        successHandler.setPostLogoutRedirectUri(environment.getProperty("postLogoutRedirectUri"));
         return successHandler;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .headers().frameOptions().disable()
+        http.headers().frameOptions().disable()
                 .addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM zero.teamcore.cn"));
 
         http.authorizeRequests()
-
                 // allow anonymous access to the root page
                 .antMatchers("/users/**", "/logout").permitAll()
 
