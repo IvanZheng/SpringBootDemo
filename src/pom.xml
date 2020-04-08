@@ -12,7 +12,6 @@
         <module>SpringBootDemo.Domain</module>
         <module>SpringBootDemo.Application</module>
         <module>IFramework</module>
-        <module>demo</module>
     </modules>
     <dependencies>
 

@@ -34,9 +34,9 @@ import java.util.Arrays;
 //@ImportResource(locations={"classpath:spring-mybatis.xml"})
 public class DemoApplication extends SpringBootServletInitializer {
 
-    public DemoApplication(Environment env) {
-        this.env = env;
-    }
+//    public DemoApplication(Environment env) {
+//        this.env = env;
+//    }
 
     public static void main(String[] args) {
 
@@ -49,7 +49,8 @@ public class DemoApplication extends SpringBootServletInitializer {
         return builder.sources(DemoApplication.class);
     }
 
-    private final Environment env;
+    @Autowired
+    private Environment env;
 
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {

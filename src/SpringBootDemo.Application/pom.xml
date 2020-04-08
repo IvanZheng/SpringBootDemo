@@ -30,7 +30,6 @@
             <groupId>ivan</groupId>
             <artifactId>SpringBootDemo.Domain</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
