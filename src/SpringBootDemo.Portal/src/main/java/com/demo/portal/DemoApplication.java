@@ -23,6 +23,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 
+import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -33,13 +34,7 @@ import java.util.Arrays;
 @EnableCaching
 //@ImportResource(locations={"classpath:spring-mybatis.xml"})
 public class DemoApplication extends SpringBootServletInitializer {
-
-//    public DemoApplication(Environment env) {
-//        this.env = env;
-//    }
-
     public static void main(String[] args) {
-
         SpringApplication.run(DemoApplication.class, args);
     }
 
@@ -47,23 +42,6 @@ public class DemoApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         // 注意这里要指向原先用main方法执行的Application启动类
         return builder.sources(DemoApplication.class);
-    }
-
-    @Autowired
-    private Environment env;
-
-    @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
-        return args -> {
-            if (env.acceptsProfiles(Profiles.of("dev"))) {
-                System.out.println("Let's inspect the beans provided by Spring Boot:");
-                String[] beanNames = ctx.getBeanDefinitionNames();
-                Arrays.sort(beanNames);
-                for (String beanName : beanNames) {
-                    System.out.println(beanName);
-                }
-            }
-        };
     }
 }
 
