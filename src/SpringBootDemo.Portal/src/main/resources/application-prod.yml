@@ -74,7 +74,7 @@ spring:
               - openid
         provider:
           zero:
-            issuer-uri: http://zero.teamcore.cn/ids
+            issuer-uri: https://teamcore.cn/zero.ids
 
 mybatis:
   configuration:

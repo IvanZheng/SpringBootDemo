@@ -75,7 +75,7 @@ spring:
 
         provider:
           zero:
-            issuer-uri: http://zero.teamcore.cn/ids
+            issuer-uri: https://teamcore.cn/zero.ids
 #security:
 #  oauth2:
 #    client:
