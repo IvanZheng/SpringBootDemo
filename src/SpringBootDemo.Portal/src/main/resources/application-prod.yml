@@ -69,7 +69,7 @@ spring:
             client-id: DemoSpringBootMvc
             client-secret: secret
             scope:
-              - roles
+              - role
               - profile
               - openid
         provider:
