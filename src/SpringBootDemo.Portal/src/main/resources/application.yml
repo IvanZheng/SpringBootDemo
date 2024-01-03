@@ -13,6 +13,10 @@ spring:
        content-type: text/html
   rabbitmq:
     virtualHost: demo
+    host: ${RABBITMQ_HOST}
+    port: 5673
+    username: ${COMMON_USERNAME}
+    password: ${COMMON_PASSWORD}
 security:
   jwt:
     token:
