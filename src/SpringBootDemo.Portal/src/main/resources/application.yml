@@ -11,12 +11,23 @@ spring:
      mode: HTML
      servlet:
        content-type: text/html
-
+  rabbitmq:
+    virtualHost: demo
 security:
   jwt:
     token:
       secret-key: demoKey
       expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+
+rabbit:
+  routingKey:
+    record: record
+    config: config
+  exchange:
+    demo: demo
+  queue:
+    record: record
+    config: config
 
 mybatis:
   mapper-locations: classpath:mybatis/*.xml
